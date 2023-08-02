@@ -1,4 +1,4 @@
-package med.voll.alura.api.medico;
+package med.voll.alura.api.medico.DTO;
 
 public enum Especialidade {
     ORTOPEDIA,
