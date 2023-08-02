@@ -33,7 +33,7 @@ public class MedicoController {
     //serem retornados "medicos?size=(numero de registros)" o default é 20.
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListagemMedico::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
 
     @PutMapping
@@ -43,5 +43,14 @@ public class MedicoController {
         medico.atualizarInformacoes(data);
         return new ResponseEntity<>("Médico atualizado", HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> excluir(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
+        return new ResponseEntity<>("Médico excluido com Sucesso", HttpStatus.NO_CONTENT);
+    }
+
 
 }
