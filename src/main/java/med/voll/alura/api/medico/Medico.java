@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.alura.api.endereco.Endereco;
+import med.voll.alura.api.medico.DTO.DadosAtualizacaoMedico;
+import med.voll.alura.api.medico.DTO.DadosCadastradosMedico;
+import med.voll.alura.api.medico.DTO.Especialidade;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
@@ -36,5 +39,19 @@ public class Medico {
         this.telefone = data.telefone();
         this.especialidade = data.especialidade();
         this.endereco = new Endereco(data.endereco());
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoMedico data) {
+        if (data.nome() != null) {
+            this.nome = data.nome();
+        }
+
+        if (data.telefone() != null) {
+            this.telefone = data.telefone();
+        }
+
+        if (data.endereco() != null) {
+            this.endereco.atualizarInformacoes(data.endereco());
+        }
     }
 }
