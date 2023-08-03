@@ -6,12 +6,12 @@ services:
     container_name: Spring-Alura-JPA
     restart: always
     ports:
-      - 3306:3306
+      - ?:?
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ?
       MYSQL_DATABASE: Spring-Alura-JPA
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_USER: ?
+      MYSQL_PASSWORD: ?
     volumes:
       - pgdata:/data/mysql
 
