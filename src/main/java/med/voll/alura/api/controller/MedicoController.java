@@ -56,6 +56,4 @@ public class MedicoController {
         medico.excluir();
         return new ResponseEntity<>("Médico excluido com Sucesso", HttpStatus.NO_CONTENT);
     }
-
-
 }
