@@ -32,4 +32,9 @@ public class PacienteController {
     public Page<DadosListagemPaciente> listar(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
         return repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
     }
+
+    @GetMapping("/{id}")
+    public DadosListagemPaciente listarById(@PathVariable Long id) {
+        return repository.findOneByIdAndAtivoTrue(id);
+    }
 }

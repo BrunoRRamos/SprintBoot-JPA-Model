@@ -44,6 +44,11 @@ public class MedicoController {
         return new ResponseEntity<>("Médico atualizado", HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public DadosListagemMedico listarById(@PathVariable Long id) {
+        return repository.findOneByIdAndAtivoTrue(id);
+    }
+
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> excluir(@PathVariable Long id) {
