@@ -36,6 +36,11 @@ public class MedicoController {
         return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
 
+    @GetMapping("/{id}")
+    public DadosListagemMedico listarById(@PathVariable Long id) {
+        return repository.findOneByIdAndAtivoTrue(id);
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoMedico data) {
@@ -51,6 +56,4 @@ public class MedicoController {
         medico.excluir();
         return new ResponseEntity<>("Médico excluido com Sucesso", HttpStatus.NO_CONTENT);
     }
-
-
 }
