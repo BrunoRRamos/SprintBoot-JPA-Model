@@ -1,6 +1,7 @@
 package med.voll.alura.api.controller;
 
 import jakarta.validation.Valid;
+import med.voll.alura.api.paciente.DTO.DadosAtualizacaoPaciente;
 import med.voll.alura.api.paciente.DTO.DadosCadastroPaciente;
 import med.voll.alura.api.paciente.DTO.DadosListagemPaciente;
 import med.voll.alura.api.paciente.Paciente;
@@ -36,5 +37,13 @@ public class PacienteController {
     @GetMapping("/{id}")
     public DadosListagemPaciente listarById(@PathVariable Long id) {
         return repository.findOneByIdAndAtivoTrue(id);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoPaciente data) {
+        var paciente = repository.getReferenceById(data.id());
+        paciente.atualizarInformacoes(data);
+        return new ResponseEntity<>("Paciente atualizado", HttpStatus.OK);
     }
 }

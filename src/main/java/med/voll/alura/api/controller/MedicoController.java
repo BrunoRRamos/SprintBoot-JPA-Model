@@ -36,17 +36,17 @@ public class MedicoController {
         return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
 
+    @GetMapping("/{id}")
+    public DadosListagemMedico listarById(@PathVariable Long id) {
+        return repository.findOneByIdAndAtivoTrue(id);
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoMedico data) {
         var medico = repository.getReferenceById(data.id());
         medico.atualizarInformacoes(data);
         return new ResponseEntity<>("Médico atualizado", HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public DadosListagemMedico listarById(@PathVariable Long id) {
-        return repository.findOneByIdAndAtivoTrue(id);
     }
 
     @DeleteMapping("/{id}")

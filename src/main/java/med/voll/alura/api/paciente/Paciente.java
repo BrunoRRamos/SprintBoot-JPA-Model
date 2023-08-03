@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.alura.api.endereco.Endereco;
+import med.voll.alura.api.paciente.DTO.DadosAtualizacaoPaciente;
 import med.voll.alura.api.paciente.DTO.DadosCadastroPaciente;
 
 @Table(name = "pacientes")
@@ -35,6 +36,20 @@ public class Paciente {
         this.telefone = data.telefone();
         this.cpf = data.cpf();
         this.endereco = new Endereco(data.endereco());
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoPaciente data) {
+        if (data.nome() != null) {
+            this.nome = data.nome();
+        }
+
+        if (data.telefone() != null) {
+            this.telefone = data.telefone();
+        }
+
+        if (data.endereco() != null) {
+            this.endereco.atualizarInformacoes(data.endereco());
+        }
     }
 
     public void excluir() {
